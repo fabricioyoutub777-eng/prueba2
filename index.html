@@ -12,50 +12,23 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: {
-                            400: '#D4AF37',
-                            500: '#C59B27',
-                            600: '#AA7C11',
-                            700: '#8B6508'
-                        },
+                        gold: { 400: '#D4AF37', 500: '#C59B27', 600: '#AA7C11', 700: '#8B6508' },
                         darklux: '#0F172A'
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif']
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
                 }
             }
         }
     </script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         .font-serif { font-family: 'Playfair Display', serif; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-        }
-        .dark .glass-card {
-            background: rgba(30, 41, 59, 0.85);
-            backdrop-filter: blur(10px);
-        }
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #DFAC6C 0%, #C59B27 50%, #8B6508 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gold-btn-gradient {
-            background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
-        }
-        .gold-btn-gradient:hover {
-            background: linear-gradient(135deg, #E5C158 0%, #C59B27 100%);
-        }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
+        .dark .glass-card { background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(10px); }
+        .gold-gradient-text { background: linear-gradient(135deg, #DFAC6C 0%, #C59B27 50%, #8B6508 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-btn-gradient { background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%); }
+        .gold-btn-gradient:hover { background: linear-gradient(135deg, #E5C158 0%, #C59B27 100%); }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 pb-24">
@@ -74,12 +47,12 @@
             </div>
 
             <div class="flex items-center space-x-3 sm:space-x-4">
-                <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+                <button id="themeToggleBtn" type="button" onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
                     <i class="fa-solid fa-moon text-lg dark:hidden"></i>
                     <i class="fa-solid fa-sun text-lg hidden dark:block text-amber-400"></i>
                 </button>
 
-                <button id="adminPortalBtn" onclick="handleAdminBtnClick()" class="flex items-center space-x-2 px-4 py-2 rounded-full border border-amber-500/30 hover:border-amber-500 text-amber-700 dark:text-amber-400 font-medium text-sm transition-all shadow-sm">
+                <button id="adminPortalBtn" type="button" onclick="handleAdminBtnClick()" class="flex items-center space-x-2 px-4 py-2 rounded-full border border-amber-500/30 hover:border-amber-500 text-amber-700 dark:text-amber-400 font-medium text-sm transition-all shadow-sm">
                     <i class="fa-solid fa-user-gear"></i>
                     <span id="adminBtnText" class="hidden sm:inline">Panel Admin</span>
                 </button>
@@ -89,7 +62,6 @@
 
     <!-- Main Content -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Storefront View -->
         <section id="storefrontView" class="space-y-8">
             <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 text-white min-h-[260px] flex items-center p-8 sm:p-12 border border-amber-500/20">
                 <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1400&q=80" alt="Perfumes de Lujo" class="absolute inset-0 w-full h-full object-cover opacity-35">
@@ -107,13 +79,11 @@
                         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                         <input type="text" id="searchInput" placeholder="Buscar perfume o notas..." oninput="applyFilters()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
                     </div>
-
                     <div>
                         <select id="brandSelect" onchange="applyFilters()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
                             <option value="">Todas las marcas</option>
                         </select>
                     </div>
-
                     <div>
                         <select id="categorySelect" onchange="applyFilters()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
                             <option value="">Todas las familias / géneros</option>
@@ -122,7 +92,6 @@
                             <option value="Mujer">Mujer</option>
                         </select>
                     </div>
-
                     <div class="flex items-center justify-between px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
                         <label for="stockToggle" class="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">Solo Disponibles</label>
                         <input type="checkbox" id="stockToggle" onchange="applyFilters()" class="w-4 h-4 accent-amber-500 rounded cursor-pointer">
@@ -139,7 +108,6 @@
                     <i class="fa-solid fa-bottle-droplet"></i>
                 </div>
                 <h3 class="text-xl font-serif font-semibold text-slate-800 dark:text-slate-200">No se encontraron perfumes</h3>
-                <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Intenta cambiar los términos de búsqueda o limpiar los filtros seleccionados.</p>
                 <button onclick="resetFilters()" class="px-5 py-2.5 rounded-xl gold-btn-gradient text-white text-sm font-semibold shadow-md">Limpiar Filtros</button>
             </div>
         </section>
@@ -152,17 +120,16 @@
                     <h2 class="text-3xl font-serif font-bold text-slate-900 dark:text-white">Gestión de Inventario</h2>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <button onclick="openAddModal()" class="px-5 py-2.5 rounded-xl gold-btn-gradient text-white font-medium text-sm shadow-lg shadow-amber-500/20 flex items-center space-x-2">
+                    <button type="button" onclick="openAddModal()" class="px-5 py-2.5 rounded-xl gold-btn-gradient text-white font-medium text-sm shadow-lg shadow-amber-500/20 flex items-center space-x-2">
                         <i class="fa-solid fa-plus"></i>
                         <span>Agregar Perfume</span>
                     </button>
-                    <button onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl border border-red-300 text-red-600 dark:border-red-800 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 text-sm font-medium transition-colors">
+                    <button type="button" onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl border border-red-300 text-red-600 dark:border-red-800 dark:text-red-400 hover:bg-red-50 text-sm font-medium transition-colors">
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- WhatsApp Config Card -->
             <div class="glass-card p-6 rounded-2xl border border-amber-500/20 shadow-sm space-y-4">
                 <h3 class="text-lg font-serif font-bold text-slate-900 dark:text-white flex items-center space-x-2">
                     <i class="fa-brands fa-whatsapp text-emerald-500 text-xl"></i>
@@ -173,14 +140,13 @@
                         <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Número Telefónico (con código de país, sin '+' ni espacios)</label>
                         <input type="text" id="adminPhoneInput" placeholder="Ej: 5491122334455" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-amber-500">
                     </div>
-                    <button onclick="saveAdminPhone()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md transition-colors flex items-center justify-center space-x-2">
+                    <button type="button" onclick="saveAdminPhone()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md transition-colors flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-floppy-disk"></i>
                         <span>Guardar WhatsApp</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Inventory Table -->
             <div class="glass-card rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm">
@@ -203,7 +169,7 @@
 
     <!-- FLOATING CART BOTTOM BAR -->
     <div id="floatingCartBar" class="fixed bottom-4 left-4 right-4 max-w-xl mx-auto z-40 hidden">
-        <button onclick="openCartModal()" class="w-full bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-amber-500/30 hover:scale-[1.01] transition-transform">
+        <button type="button" onclick="openCartModal()" class="w-full bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-amber-500/30 hover:scale-[1.01] transition-transform">
             <div class="flex items-center space-x-3">
                 <div class="relative bg-amber-500 text-white w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm shadow-md">
                     <i class="fa-solid fa-cart-shopping"></i>
@@ -217,50 +183,35 @@
 
     <!-- Modals -->
     <div id="cartModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-amber-500/20 relative max-h-[90vh] flex flex-col">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-amber-500/25 relative max-h-[90vh] flex flex-col">
             <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <div>
-                    <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white">Tu Pedido</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Revisa los ítems seleccionados</p>
-                </div>
-                <button onclick="closeCartModal()" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+                <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white">Tu Pedido</h3>
+                <button type="button" onclick="closeCartModal()" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-
             <div id="cartItemsList" class="p-5 overflow-y-auto space-y-4 flex-grow"></div>
-
             <div class="p-5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 space-y-4">
                 <div class="flex justify-between items-center text-lg font-bold">
                     <span class="text-slate-700 dark:text-slate-300">Total:</span>
                     <span id="cartModalTotal" class="text-amber-600 dark:text-amber-400">$0.00</span>
                 </div>
-                <button onclick="goToCheckoutModal()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg flex items-center justify-center space-x-2 transition-colors">
-                    <span>Continuar a Datos de Envío</span>
-                    <i class="fa-solid fa-arrow-right"></i>
+                <button type="button" onclick="goToCheckoutModal()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg flex items-center justify-center space-x-2 transition-colors">
+                    <span>Continuar a Datos de Envío</span><i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
         </div>
     </div>
 
     <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm overflow-y-auto">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-amber-500/20 relative my-8 space-y-6">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-amber-500/25 relative my-8 space-y-6">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
-                <div>
-                    <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white">Datos del Envío y Pago</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Completa la información para finalizar</p>
-                </div>
-                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
+                <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white">Datos del Envío y Pago</h3>
+                <button type="button" onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
-
             <form onsubmit="submitOrderToWhatsapp(event)" class="space-y-4 text-sm">
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500">Nombre Completo</label>
                     <input type="text" id="custName" required placeholder="Ej: Alexander M." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
                 </div>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="text-xs font-semibold uppercase text-slate-500">Forma de Envío</label>
@@ -274,12 +225,10 @@
                         <input type="text" id="custPhone" required placeholder="Ej: +54 9 11..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
                     </div>
                 </div>
-
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500">Dirección Completa</label>
                     <input type="text" id="custAddress" required placeholder="Calle, Número, Ciudad" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
                 </div>
-
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500">Medio de Pago</label>
                     <select id="custPayment" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
@@ -288,16 +237,13 @@
                         <option value="Tarjeta de Crédito / Débito">Tarjeta de Crédito / Débito</option>
                     </select>
                 </div>
-
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500">Observaciones (Opcional)</label>
-                    <textarea id="custNotes" rows="2" placeholder="Horario preferido de entrega o detalles adicionales..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none"></textarea>
+                    <textarea id="custNotes" rows="2" placeholder="Horario preferido de entrega..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none"></textarea>
                 </div>
-
                 <div class="pt-4">
                     <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base shadow-xl flex items-center justify-center space-x-2 transition-colors">
-                        <i class="fa-brands fa-whatsapp text-xl"></i>
-                        <span>Pedir por WhatsApp</span>
+                        <i class="fa-brands fa-whatsapp text-xl"></i><span>Pedir por WhatsApp</span>
                     </button>
                 </div>
             </form>
@@ -305,28 +251,20 @@
     </div>
 
     <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-amber-500/20 relative max-h-[90vh] flex flex-col">
-            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-amber-500/25 relative max-h-[90vh] flex flex-col">
+            <button type="button" onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
             <div id="detailModalContent" class="overflow-y-auto p-6 space-y-6"></div>
         </div>
     </div>
 
     <div id="loginModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-amber-500/20 relative">
-            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-amber-500/25 relative">
+            <button type="button" onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400"><i class="fa-solid fa-xmark text-xl"></i></button>
             <div class="text-center space-y-2 mb-6">
-                <div class="w-12 h-12 mx-auto rounded-full gold-btn-gradient flex items-center justify-center text-white text-xl">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
+                <div class="w-12 h-12 mx-auto rounded-full gold-btn-gradient flex items-center justify-center text-white text-xl"><i class="fa-solid fa-lock"></i></div>
                 <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">Acceso Administrador</h3>
                 <p class="text-xs text-slate-500 dark:text-slate-400">Ingresa tus credenciales de Firebase</p>
             </div>
-
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">Correo Electrónico</label>
@@ -336,31 +274,21 @@
                     <label class="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">Contraseña</label>
                     <input type="password" id="loginPass" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none">
                 </div>
-                
-                <div id="loginError" class="hidden text-red-500 text-xs font-medium text-center">
-                    Credenciales incorrectas o usuario no registrado en Firebase.
-                </div>
-
-                <button type="submit" class="w-full py-3 rounded-xl gold-btn-gradient text-white font-semibold text-sm shadow-md">
-                    Iniciar Sesión
-                </button>
+                <div id="loginError" class="hidden text-red-500 text-xs font-medium text-center">Credenciales incorrectas o usuario no registrado.</div>
+                <button type="submit" class="w-full py-3 rounded-xl gold-btn-gradient text-white font-semibold text-sm shadow-md">Iniciar Sesión</button>
             </form>
         </div>
     </div>
 
     <div id="productModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm overflow-y-auto">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-amber-500/20 relative my-8">
-            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-amber-500/25 relative my-8">
+            <button type="button" onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400"><i class="fa-solid fa-xmark text-xl"></i></button>
             <h3 id="productModalTitle" class="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-6">Agregar Perfume</h3>
-
             <form onsubmit="handleProductSubmit(event)" class="space-y-4">
                 <input type="hidden" id="prodId">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="text-xs font-semibold uppercase text-slate-500">Nombre del Perfume</label>
+                        <label class="text-xs font-semibold uppercase text-slate-500">Nombre</label>
                         <input type="text" id="prodName" required class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none">
                     </div>
                     <div>
@@ -368,7 +296,6 @@
                         <input type="text" id="prodBrand" required class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none">
                     </div>
                 </div>
-
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                         <label class="text-xs font-semibold uppercase text-slate-500">Precio ($)</label>
@@ -387,149 +314,10 @@
                         </select>
                     </div>
                 </div>
-
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500">URL de Imagen</label>
                     <input type="url" id="prodImage" required placeholder="https://..." class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none">
                 </div>
-
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500">Descripción Breve</label>
-                    <textarea id="prodDesc" rows="2" required class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none"></textarea>
-                </div>
-
-                <div class="space-y-2 border-t border-slate-200 dark:border-slate-800 pt-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Pirámide Olfativa</span>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="text-[11px] font-semibold text-slate-500">Notas de Salida</label>
-                            <input type="text" id="prodTopNotes" placeholder="Ej: Bergamota, Limón" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-xs outline-none">
-                        </div>
-                        <div>
-                            <label class="text-[11px] font-semibold text-slate-500">Notas de Corazón</label>
-                            <input type="text" id="prodHeartNotes" placeholder="Ej: Jazmín, Rosa" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-xs outline-none">
-                        </div>
-                        <div>
-                            <label class="text-[11px] font-semibold text-slate-500">Notas de Fondo</label>
-                            <input type="text" id="prodBaseNotes" placeholder="Ej: Ámbar, Vainilla" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-xs outline-none">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-4 flex justify-end space-x-3">
-                    <button type="button" onclick="closeProductModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">Cancelar</button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl gold-btn-gradient text-white text-sm font-semibold shadow-md">Guardar Perfume</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center space-x-3 border border-amber-500/30">
-        <i id="toastIcon" class="fa-solid fa-check-circle text-amber-400 text-lg"></i>
-        <span id="toastMsg" class="text-sm font-medium">Operación realizada</span>
-    </div>
-
-    <!-- Firebase JS Integration & App Logic -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, updateDoc, deleteDoc, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyD3fMW2txHKNAQGIIC6DQIn3J2O7D1cyco",
-            authDomain: "mitiendaperfumes-e0ffc.firebaseapp.com",
-            projectId: "mitiendaperfumes-e0ffc",
-            storageBucket: "mitiendaperfumes-e0ffc.firebasestorage.app",
-            messagingSenderId: "170308114924",
-            appId: "1:170308114924:web:ce126458628092c90988c9",
-            measurementId: "G-R6RZ83WJ7F"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        let perfumesList = [];
-        let cart = [];
-        let adminPhone = '5491100000000';
-        let isAdminLoggedIn = false;
-
-        const initialPerfumes = [
-            {
-                name: "Sauvage Eau de Parfum",
-                brand: "Dior",
-                price: 165.00,
-                stock: 8,
-                category: "Hombre",
-                image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
-                description: "Una fragancia poderosa e intrigante, inspirada en desiertos bajo cielos estrellados. Fresca y amaderada.",
-                topNotes: "Bergamota de Calabria",
-                heartNotes: "Pimienta de Sichuan, Lavanda",
-                baseNotes: "Ambroxan, Vainilla de Papúa Nueva Guinea"
-            },
-            {
-                name: "Baccarat Rouge 540",
-                brand: "Maison Francis Kurkdjian",
-                price: 325.00,
-                stock: 3,
-                category: "Unisex",
-                image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=800&q=80",
-                description: "Un perfume luminoso, denso e intenso. Firma olfativa ambarada, floral y amaderada altamente codiciada.",
-                topNotes: "Jazmín, Azafrán",
-                heartNotes: "Madera de Ámbar, Gris Ámbar",
-                baseNotes: "Resina de Abeto, Cedro"
-            },
-            {
-                name: "Chanel N°5",
-                brand: "Chanel",
-                price: 185.00,
-                stock: 12,
-                category: "Mujer",
-                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80",
-                description: "La esencia misma de la feminidad. Un ramo floral aldehídico encapsulado en un frasco de líneas puras.",
-                topNotes: "Aldehídos, Ylang-Ylang, Neroli",
-                heartNotes: "Jazmín de Grasse, Rosa de Mayo",
-                baseNotes: "Sándalo, Vainilla, Vetiver"
-            }
-        ];
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const yearSpan = document.getElementById('yearSpan');
-            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-            initFirestoreListeners();
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    isAdminLoggedIn = true;
-                    updateAdminUI(true);
-                } else {
-                    isAdminLoggedIn = false;
-                    updateAdminUI(false);
-                }
-            });
-        });
-
-        function initFirestoreListeners() {
-            const productsRef = collection(db, 'perfumes');
-            onSnapshot(productsRef, (snapshot) => {
-                if (snapshot.empty) {
-                    seedInitialData();
-                } else {
-                    perfumesList = [];
-                    snapshot.forEach(docSnap => {
-                        perfumesList.push({ id: docSnap.id, ...docSnap.data() });
-                    });
-                    populateBrandOptions();
-                    applyFilters();
-                    if (isAdminLoggedIn) renderAdminTable();
-                    updateCartUI();
-                }
-            }, (error) => {
-                console.error("Error cargando productos:", error);
-            });
-
-            const configRef = doc(db, 'settings', 'general');
-            onSnapshot(configRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    adminPhone = docSnap.data().phone || '5491
+                    <textarea id="prodDesc" rows="2" required class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-
