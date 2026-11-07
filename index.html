@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURUM PARFUMS</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#D4AF37',
+                            500: '#C59B27',
+                            600: '#AA7C11',
+                            700: '#8B6508'
+                        },
+                        darklux: '#0F172A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(10px);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #DFAC6C 0%, #C59B27 50%, #8B6508 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-btn-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
+        }
+        .gold-btn-gradient:hover {
+            background: linear-gradient(135deg, #E5C158 0%, #C59B27 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- App Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-amber-200/40 dark:border-amber-900/30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                <div class="w-10 h-10 rounded-full gold-btn-gradient flex items-center justify-center text-white text-xl shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid font-serif">E</i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-serif font-bold tracking-wider gold-gradient-text">AURUM PARFUMS</h1>
+                    <p class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">Haute Parfumerie</p>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <!-- Theme Toggle -->
+                <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+                    <i class="fa-solid fa-moon text-lg dark:hidden"></i>
+                    <i class="fa-solid fa-sun text-lg hidden dark:block text-amber-400"></i>
+                </button>
+
+                <!-- Admin Action Button -->
+                <button id="adminPortalBtn" onclick="handleAdminBtnClick()" class="flex items-center space-x-2 px-4 py-2 rounded-full border border-amber-500/30 hover:border-amber-500 text-amber-700 dark:text-amber-400 font-medium text-sm transition-all shadow-sm">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span id="adminBtnText" class="hidden sm:inline">Panel Admin</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Storefront View -->
+        <section id="storefrontView" class="space-y-8">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 text-white min-h-[260px] flex items-center p-8 sm:p-12 border border-amber-500/20">
+                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1400&q=80" alt="Perfumes de Lujo" class="absolute inset-0 w-full h-full object-cover opacity-35">
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40">Colección Exclusiva</span>
+                    <h2 class="text-3xl sm:text-5xl font-serif font-bold leading-tight">Encuentra Tu Fragancia Signature</h2>
+                    <p class="text-slate-300 text-sm sm:text-base">Explora nuestro catálogo exclusivo. Selecciona tu perfume ideal y pide directamente por WhatsApp con atención personalizada.</p>
+                </div>
+            </div>
+
+            <!-- Filters & Search Toolbar -->
+            <div class="glass-card p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Search input -->
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar perfume o notas..." oninput="applyFilters()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+
+                    <!-- Brand Filter -->
+                    <div>
+                        <select id="brandSelect" onchange="applyFilters()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="">Todas las marcas</option>
+                        </select>
+                    </div>
+
+                    <!-- Gender/Category Filter -->
+                    <div>
+                        <select id="categorySelect" onchange="applyFilters()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="">Todas las familias / géneros</option>
+                            <option value="Unisex">Unisex</option>
+                            <option value="Hombre">Hombre</option>
+                            <option value="Mujer">Mujer</option>
+                        </select>
+                    </div>
+
+                    <!-- Stock Filter Toggle -->
+                    <div class="flex items-center justify-between px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+                        <label for="stockToggle" class="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">Solo Disponibles</label>
+                        <input type="checkbox" id="stockToggle" onchange="applyFilters()" class="w-4 h-4 accent-amber-500 rounded cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Dynamic cards populated via JS -->
+            </div>
+
+            <!-- Empty State Container -->
+            <div id="emptyState" class="hidden text-center py-16 space-y-4">
+                <div class="w-20 h-20 mx-auto rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400 text-3xl">
+                    <i class="fa-solid fa-bottle-droplet"></i>
+                </div>
+                <h3 class="text-xl font-serif font-semibold text-slate-800 dark:text-slate-200">No se encontraron perfumes</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Intenta cambiar los términos de búsqueda o limpiar los filtros seleccionados.</p>
+                <button onclick="resetFilters()" class="px-5 py-2.5 rounded-xl gold-btn-gradient text-white text-sm font-semibold shadow-md">Limpiar Filtros</button>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard View -->
+        <section id="adminDashboardView" class="hidden space-y-8">
+            <!-- Dashboard Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Modo Administrador</span>
+                    <h2 class="text-3xl font-serif font-bold text-slate-900 dark:text-white">Gestión de Inventario</h2>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="openAddModal()" class="px-5 py-2.5 rounded-xl gold-btn-gradient text-white font-medium text-sm shadow-lg shadow-amber-500/20 flex items-center space-x-2">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Agregar Perfume</span>
+                    </button>
+                    <button onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl border border-red-300 text-red-600 dark:border-red-800 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 text-sm font-medium transition-colors">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Settings Card (WhatsApp Config) -->
+            <div class="glass-card p-6 rounded-2xl border border-amber-500/20 shadow-sm space-y-4">
+                <h3 class="text-lg font-serif font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-emerald-500 text-xl"></i>
+                    <span>Configuración de Contacto WhatsApp</span>
+                </h3>
+                <div class="flex flex-col sm:flex-row gap-4 items-end">
+                    <div class="flex-grow w-full space-y-1">
+                        <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Número Telefónico (con código de país, sin '+' ni espacios)</label>
+                        <input type="text" id="adminPhoneInput" placeholder="Ej: 5491122334455" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <button onclick="saveAdminPhone()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Guardar WhatsApp</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Inventory Table -->
+            <div class="glass-card rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 font-semibold border-b border-slate-200 dark:border-slate-700">
+                            <tr>
+                                <th class="p-4">Producto</th>
+                                <th class="p-4">Marca</th>
+                                <th class="p-4">Género/Familia</th>
+                                <th class="p-4">Precio ($)</th>
+                                <th class="p-4">Stock</th>
+                                <th class="p-4 text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2">
+            <p>© <span id="yearSpan"></span> AURUM PARFUMS. Todos los derechos reservados.</p>
+            <p>Venta directa y atención personalizada por WhatsApp.</p>
+        </div>
+    </footer>
+
+    <!-- MODALS SECTION -->
+
+    <!-- Product Detail Modal -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-amber-500/20 animate-fade-in relative max-h-[90vh] flex flex-col">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <div id="detailModalContent" class="overflow-y-auto p-6 space-y-6">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-amber-500/20 relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="text-center space-y-2 mb-6">
+                <div class="w-12 h-12 mx-auto rounded-full gold-btn-gradient flex items-center justify-center text-white text-xl shadow-lg">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">Acceso Administrador</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Ingresa tu correo y contraseña registrados en Firebase</p>
+            </div>
+
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">Correo Electrónico</label>
+                    <input type="email" id="loginUser" required placeholder="admin@ejemplo.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div>
+                    <label class="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">Contraseña</label>
+                    <input type="password" id="loginPass" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                
+                <div id="loginError" class="hidden text-red-500 text-xs font-medium text-center">
+                    Credenciales incorrectas o usuario no registrado en Firebase.
+                </div>
+
+                <button type="submit" class="w-full py-3 rounded-xl gold-btn-gradient text-white font-semibold text-sm shadow-md hover:opacity-95 transition-opacity">
+                    Iniciar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Form Modal (Add / Edit) -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-amber-5
