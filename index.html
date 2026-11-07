@@ -12,26 +12,53 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: { 400: '#D4AF37', 500: '#C59B27', 600: '#AA7C11', 700: '#8B6508' },
+                        gold: {
+                            400: '#D4AF37',
+                            500: '#C59B27',
+                            600: '#AA7C11',
+                            700: '#8B6508'
+                        },
                         darklux: '#0F172A'
                     },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
                 }
             }
         }
     </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         .font-serif { font-family: 'Playfair Display', serif; }
-        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
-        .dark .glass-card { background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(10px); }
-        .gold-gradient-text { background: linear-gradient(135deg, #DFAC6C 0%, #C59B27 50%, #8B6508 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-btn-gradient { background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%); }
-        .gold-btn-gradient:hover { background: linear-gradient(135deg, #E5C158 0%, #C59B27 100%); }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(10px);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #DFAC6C 0%, #C59B27 50%, #8B6508 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-btn-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
+        }
+        .gold-btn-gradient:hover {
+            background: linear-gradient(135deg, #E5C158 0%, #C59B27 100%);
+        }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 pb-24">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-amber-200/40 dark:border-amber-900/30 shadow-sm">
@@ -47,12 +74,12 @@
             </div>
 
             <div class="flex items-center space-x-3 sm:space-x-4">
-                <button id="themeToggleBtn" type="button" onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+                <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
                     <i class="fa-solid fa-moon text-lg dark:hidden"></i>
                     <i class="fa-solid fa-sun text-lg hidden dark:block text-amber-400"></i>
                 </button>
 
-                <button id="adminPortalBtn" type="button" onclick="handleAdminBtnClick()" class="flex items-center space-x-2 px-4 py-2 rounded-full border border-amber-500/30 hover:border-amber-500 text-amber-700 dark:text-amber-400 font-medium text-sm transition-all shadow-sm">
+                <button id="adminPortalBtn" onclick="handleAdminBtnClick()" class="flex items-center space-x-2 px-4 py-2 rounded-full border border-amber-500/30 hover:border-amber-500 text-amber-700 dark:text-amber-400 font-medium text-sm transition-all shadow-sm">
                     <i class="fa-solid fa-user-gear"></i>
                     <span id="adminBtnText" class="hidden sm:inline">Panel Admin</span>
                 </button>
@@ -62,13 +89,14 @@
 
     <!-- Main Content -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Storefront View -->
         <section id="storefrontView" class="space-y-8">
             <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 text-white min-h-[260px] flex items-center p-8 sm:p-12 border border-amber-500/20">
                 <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1400&q=80" alt="Perfumes de Lujo" class="absolute inset-0 w-full h-full object-cover opacity-35">
                 <div class="relative z-10 max-w-2xl space-y-4">
                     <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40">Colección Exclusiva</span>
                     <h2 class="text-3xl sm:text-5xl font-serif font-bold leading-tight">Encuentra Tu Fragancia Signature</h2>
-                    <p class="text-slate-300 text-sm sm:text-base">Explora nuestro catálogo exclusivo. Agrega tus perfumes al carrito y completa tu pedido directamente por WhatsApp.</p>
+                    <p class="text-slate-300 text-sm sm:text-base">Explora nuestro catálogo exclusivo. Selecciona tu perfume ideal y pide directamente por WhatsApp con atención personalizada.</p>
                 </div>
             </div>
 
@@ -79,11 +107,13 @@
                         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                         <input type="text" id="searchInput" placeholder="Buscar perfume o notas..." oninput="applyFilters()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
                     </div>
+
                     <div>
                         <select id="brandSelect" onchange="applyFilters()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
                             <option value="">Todas las marcas</option>
                         </select>
                     </div>
+
                     <div>
                         <select id="categorySelect" onchange="applyFilters()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
                             <option value="">Todas las familias / géneros</option>
@@ -92,6 +122,7 @@
                             <option value="Mujer">Mujer</option>
                         </select>
                     </div>
+
                     <div class="flex items-center justify-between px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
                         <label for="stockToggle" class="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">Solo Disponibles</label>
                         <input type="checkbox" id="stockToggle" onchange="applyFilters()" class="w-4 h-4 accent-amber-500 rounded cursor-pointer">
@@ -108,6 +139,7 @@
                     <i class="fa-solid fa-bottle-droplet"></i>
                 </div>
                 <h3 class="text-xl font-serif font-semibold text-slate-800 dark:text-slate-200">No se encontraron perfumes</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Intenta cambiar los términos de búsqueda o limpiar los filtros seleccionados.</p>
                 <button onclick="resetFilters()" class="px-5 py-2.5 rounded-xl gold-btn-gradient text-white text-sm font-semibold shadow-md">Limpiar Filtros</button>
             </div>
         </section>
@@ -120,16 +152,17 @@
                     <h2 class="text-3xl font-serif font-bold text-slate-900 dark:text-white">Gestión de Inventario</h2>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <button type="button" onclick="openAddModal()" class="px-5 py-2.5 rounded-xl gold-btn-gradient text-white font-medium text-sm shadow-lg shadow-amber-500/20 flex items-center space-x-2">
+                    <button onclick="openAddModal()" class="px-5 py-2.5 rounded-xl gold-btn-gradient text-white font-medium text-sm shadow-lg shadow-amber-500/20 flex items-center space-x-2">
                         <i class="fa-solid fa-plus"></i>
                         <span>Agregar Perfume</span>
                     </button>
-                    <button type="button" onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl border border-red-300 text-red-600 dark:border-red-800 dark:text-red-400 hover:bg-red-50 text-sm font-medium transition-colors">
+                    <button onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl border border-red-300 text-red-600 dark:border-red-800 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 text-sm font-medium transition-colors">
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </button>
                 </div>
             </div>
 
+            <!-- WhatsApp Config Card -->
             <div class="glass-card p-6 rounded-2xl border border-amber-500/20 shadow-sm space-y-4">
                 <h3 class="text-lg font-serif font-bold text-slate-900 dark:text-white flex items-center space-x-2">
                     <i class="fa-brands fa-whatsapp text-emerald-500 text-xl"></i>
@@ -140,13 +173,14 @@
                         <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Número Telefónico (con código de país, sin '+' ni espacios)</label>
                         <input type="text" id="adminPhoneInput" placeholder="Ej: 5491122334455" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-amber-500">
                     </div>
-                    <button type="button" onclick="saveAdminPhone()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md transition-colors flex items-center justify-center space-x-2">
+                    <button onclick="saveAdminPhone()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md transition-colors flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-floppy-disk"></i>
                         <span>Guardar WhatsApp</span>
                     </button>
                 </div>
             </div>
 
+            <!-- Inventory Table -->
             <div class="glass-card rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm">
@@ -167,104 +201,36 @@
         </section>
     </main>
 
-    <!-- FLOATING CART BOTTOM BAR -->
-    <div id="floatingCartBar" class="fixed bottom-4 left-4 right-4 max-w-xl mx-auto z-40 hidden">
-        <button type="button" onclick="openCartModal()" class="w-full bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-amber-500/30 hover:scale-[1.01] transition-transform">
-            <div class="flex items-center space-x-3">
-                <div class="relative bg-amber-500 text-white w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm shadow-md">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cartBadgeCount" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-900">0</span>
-                </div>
-                <span class="font-bold text-sm sm:text-base">Ir al Carrito</span>
-            </div>
-            <span id="cartBarTotal" class="font-bold text-base sm:text-lg text-amber-400 dark:text-amber-600">$0.00</span>
-        </button>
-    </div>
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2">
+            <p>© <span id="yearSpan"></span> AURUM PARFUMS. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <!-- Modals -->
-    <div id="cartModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-amber-500/25 relative max-h-[90vh] flex flex-col">
-            <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white">Tu Pedido</h3>
-                <button type="button" onclick="closeCartModal()" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <div id="cartItemsList" class="p-5 overflow-y-auto space-y-4 flex-grow"></div>
-            <div class="p-5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 space-y-4">
-                <div class="flex justify-between items-center text-lg font-bold">
-                    <span class="text-slate-700 dark:text-slate-300">Total:</span>
-                    <span id="cartModalTotal" class="text-amber-600 dark:text-amber-400">$0.00</span>
-                </div>
-                <button type="button" onclick="goToCheckoutModal()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg flex items-center justify-center space-x-2 transition-colors">
-                    <span>Continuar a Datos de Envío</span><i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm overflow-y-auto">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-amber-500/25 relative my-8 space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
-                <h3 class="text-xl font-serif font-bold text-slate-900 dark:text-white">Datos del Envío y Pago</h3>
-                <button type="button" onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
-            </div>
-            <form onsubmit="submitOrderToWhatsapp(event)" class="space-y-4 text-sm">
-                <div>
-                    <label class="text-xs font-semibold uppercase text-slate-500">Nombre Completo</label>
-                    <input type="text" id="custName" required placeholder="Ej: Alexander M." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="text-xs font-semibold uppercase text-slate-500">Forma de Envío</label>
-                        <select id="custShipping" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
-                            <option value="Envío a Domicilio">Envío a Domicilio</option>
-                            <option value="Retiro en Tienda">Retiro en Tienda</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="text-xs font-semibold uppercase text-slate-500">Teléfono / WhatsApp</label>
-                        <input type="text" id="custPhone" required placeholder="Ej: +54 9 11..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
-                    </div>
-                </div>
-                <div>
-                    <label class="text-xs font-semibold uppercase text-slate-500">Dirección Completa</label>
-                    <input type="text" id="custAddress" required placeholder="Calle, Número, Ciudad" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
-                </div>
-                <div>
-                    <label class="text-xs font-semibold uppercase text-slate-500">Medio de Pago</label>
-                    <select id="custPayment" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none">
-                        <option value="Transferencia Bancaria">Transferencia Bancaria</option>
-                        <option value="Efectivo al Retirar / Entregar">Efectivo al Retirar / Entregar</option>
-                        <option value="Tarjeta de Crédito / Débito">Tarjeta de Crédito / Débito</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-xs font-semibold uppercase text-slate-500">Observaciones (Opcional)</label>
-                    <textarea id="custNotes" rows="2" placeholder="Horario preferido de entrega..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none"></textarea>
-                </div>
-                <div class="pt-4">
-                    <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base shadow-xl flex items-center justify-center space-x-2 transition-colors">
-                        <i class="fa-brands fa-whatsapp text-xl"></i><span>Pedir por WhatsApp</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-amber-500/25 relative max-h-[90vh] flex flex-col">
-            <button type="button" onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-amber-500/20 relative max-h-[90vh] flex flex-col">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
             <div id="detailModalContent" class="overflow-y-auto p-6 space-y-6"></div>
         </div>
     </div>
 
     <div id="loginModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-amber-500/25 relative">
-            <button type="button" onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-amber-500/20 relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
             <div class="text-center space-y-2 mb-6">
-                <div class="w-12 h-12 mx-auto rounded-full gold-btn-gradient flex items-center justify-center text-white text-xl"><i class="fa-solid fa-lock"></i></div>
+                <div class="w-12 h-12 mx-auto rounded-full gold-btn-gradient flex items-center justify-center text-white text-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
                 <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">Acceso Administrador</h3>
                 <p class="text-xs text-slate-500 dark:text-slate-400">Ingresa tus credenciales de Firebase</p>
             </div>
+
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">Correo Electrónico</label>
@@ -274,21 +240,31 @@
                     <label class="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">Contraseña</label>
                     <input type="password" id="loginPass" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none">
                 </div>
-                <div id="loginError" class="hidden text-red-500 text-xs font-medium text-center">Credenciales incorrectas o usuario no registrado.</div>
-                <button type="submit" class="w-full py-3 rounded-xl gold-btn-gradient text-white font-semibold text-sm shadow-md">Iniciar Sesión</button>
+                
+                <div id="loginError" class="hidden text-red-500 text-xs font-medium text-center">
+                    Credenciales incorrectas o usuario no registrado en Firebase.
+                </div>
+
+                <button type="submit" class="w-full py-3 rounded-xl gold-btn-gradient text-white font-semibold text-sm shadow-md">
+                    Iniciar Sesión
+                </button>
             </form>
         </div>
     </div>
 
     <div id="productModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm overflow-y-auto">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-amber-500/25 relative my-8">
-            <button type="button" onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-amber-500/20 relative my-8">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
             <h3 id="productModalTitle" class="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-6">Agregar Perfume</h3>
+
             <form onsubmit="handleProductSubmit(event)" class="space-y-4">
                 <input type="hidden" id="prodId">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="text-xs font-semibold uppercase text-slate-500">Nombre</label>
+                        <label class="text-xs font-semibold uppercase text-slate-500">Nombre del Perfume</label>
                         <input type="text" id="prodName" required class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none">
                     </div>
                     <div>
@@ -296,6 +272,7 @@
                         <input type="text" id="prodBrand" required class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none">
                     </div>
                 </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                         <label class="text-xs font-semibold uppercase text-slate-500">Precio ($)</label>
@@ -314,10 +291,535 @@
                         </select>
                     </div>
                 </div>
+
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500">URL de Imagen</label>
                     <input type="url" id="prodImage" required placeholder="https://..." class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none">
                 </div>
+
                 <div>
                     <label class="text-xs font-semibold uppercase text-slate-500">Descripción Breve</label>
-                    <textarea id="prodDesc" rows="2" required class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-
+                    <textarea id="prodDesc" rows="2" required class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none"></textarea>
+                </div>
+
+                <div class="space-y-2 border-t border-slate-200 dark:border-slate-800 pt-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Pirámide Olfativa</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="text-[11px] font-semibold text-slate-500">Notas de Salida</label>
+                            <input type="text" id="prodTopNotes" placeholder="Ej: Bergamota, Limón" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-xs outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-semibold text-slate-500">Notas de Corazón</label>
+                            <input type="text" id="prodHeartNotes" placeholder="Ej: Jazmín, Rosa" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-xs outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-semibold text-slate-500">Notas de Fondo</label>
+                            <input type="text" id="prodBaseNotes" placeholder="Ej: Ámbar, Vainilla" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-xs outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closeProductModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">Cancelar</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl gold-btn-gradient text-white text-sm font-semibold shadow-md">Guardar Perfume</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center space-x-3 border border-amber-500/30">
+        <i id="toastIcon" class="fa-solid fa-check-circle text-amber-400 text-lg"></i>
+        <span id="toastMsg" class="text-sm font-medium">Operación realizada</span>
+    </div>
+
+    <!-- Firebase JS Integration & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, updateDoc, deleteDoc, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD3fMW2txHKNAQGIIC6DQIn3J2O7D1cyco",
+            authDomain: "mitiendaperfumes-e0ffc.firebaseapp.com",
+            projectId: "mitiendaperfumes-e0ffc",
+            storageBucket: "mitiendaperfumes-e0ffc.firebasestorage.app",
+            messagingSenderId: "170308114924",
+            appId: "1:170308114924:web:ce126458628092c90988c9",
+            measurementId: "G-R6RZ83WJ7F"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let perfumesList = [];
+        let adminPhone = '5491100000000';
+        let isAdminLoggedIn = false;
+
+        const initialPerfumes = [
+            {
+                name: "Sauvage Eau de Parfum",
+                brand: "Dior",
+                price: 165.00,
+                stock: 8,
+                category: "Hombre",
+                image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+                description: "Una fragancia poderosa e intrigante, inspirada en desiertos bajo cielos estrellados. Fresca y amaderada.",
+                topNotes: "Bergamota de Calabria",
+                heartNotes: "Pimienta de Sichuan, Lavanda",
+                baseNotes: "Ambroxan, Vainilla de Papúa Nueva Guinea"
+            },
+            {
+                name: "Baccarat Rouge 540",
+                brand: "Maison Francis Kurkdjian",
+                price: 325.00,
+                stock: 3,
+                category: "Unisex",
+                image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=800&q=80",
+                description: "Un perfume luminoso, denso e intenso. Firma olfativa ambarada, floral y amaderada altamente codiciada.",
+                topNotes: "Jazmín, Azafrán",
+                heartNotes: "Madera de Ámbar, Gris Ámbar",
+                baseNotes: "Resina de Abeto, Cedro"
+            },
+            {
+                name: "Chanel N°5",
+                brand: "Chanel",
+                price: 185.00,
+                stock: 12,
+                category: "Mujer",
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80",
+                description: "La esencia misma de la feminidad. Un ramo floral aldehídico encapsulado en un frasco de líneas puras.",
+                topNotes: "Aldehídos, Ylang-Ylang, Neroli",
+                heartNotes: "Jazmín de Grasse, Rosa de Mayo",
+                baseNotes: "Sándalo, Vainilla, Vetiver"
+            }
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('yearSpan').textContent = new Date().getFullYear();
+            initFirestoreListeners();
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    isAdminLoggedIn = true;
+                    updateAdminUI(true);
+                } else {
+                    isAdminLoggedIn = false;
+                    updateAdminUI(false);
+                }
+            });
+        });
+
+        function initFirestoreListeners() {
+            const productsRef = collection(db, 'perfumes');
+            onSnapshot(productsRef, (snapshot) => {
+                if (snapshot.empty) {
+                    seedInitialData();
+                } else {
+                    perfumesList = [];
+                    snapshot.forEach(docSnap => {
+                        perfumesList.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    populateBrandOptions();
+                    applyFilters();
+                    if (isAdminLoggedIn) renderAdminTable();
+                }
+            }, (error) => {
+                console.error("Error cargando productos:", error);
+            });
+
+            const configRef = doc(db, 'settings', 'general');
+            onSnapshot(configRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    adminPhone = docSnap.data().phone || '5491100000000';
+                } else {
+                    setDoc(configRef, { phone: '5491100000000' });
+                }
+                const phoneInput = document.getElementById('adminPhoneInput');
+                if (phoneInput) phoneInput.value = adminPhone;
+            });
+        }
+
+        async function seedInitialData() {
+            for (const item of initialPerfumes) {
+                await addDoc(collection(db, 'perfumes'), item);
+            }
+        }
+
+        function populateBrandOptions() {
+            const select = document.getElementById('brandSelect');
+            const currentVal = select.value;
+            const brands = [...new Set(perfumesList.map(p => p.brand))].sort();
+            select.innerHTML = '<option value="">Todas las marcas</option>';
+            brands.forEach(b => {
+                const opt = document.createElement('option');
+                opt.value = b;
+                opt.textContent = b;
+                select.appendChild(opt);
+            });
+            select.value = currentVal;
+        }
+
+        window.applyFilters = function() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const brand = document.getElementById('brandSelect').value;
+            const category = document.getElementById('categorySelect').value;
+            const onlyStock = document.getElementById('stockToggle').checked;
+
+            const filtered = perfumesList.filter(p => {
+                const matchSearch = p.name.toLowerCase().includes(search) || 
+                                    p.brand.toLowerCase().includes(search) || 
+                                    (p.topNotes && p.topNotes.toLowerCase().includes(search)) ||
+                                    (p.heartNotes && p.heartNotes.toLowerCase().includes(search));
+                const matchBrand = !brand || p.brand === brand;
+                const matchCategory = !category || p.category === category;
+                const matchStock = !onlyStock || p.stock > 0;
+                return matchSearch && matchBrand && matchCategory && matchStock;
+            });
+
+            renderProductGrid(filtered);
+        };
+
+        window.resetFilters = function() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('brandSelect').value = '';
+            document.getElementById('categorySelect').value = '';
+            document.getElementById('stockToggle').checked = false;
+            applyFilters();
+        };
+
+        function renderProductGrid(items) {
+            const grid = document.getElementById('productGrid');
+            const empty = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
+
+            items.forEach(p => {
+                const isOutOfStock = p.stock <= 0;
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group";
+                card.innerHTML = `
+                    <div class="relative h-64 overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80'">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-900/80 text-white backdrop-blur-md">
+                            ${p.category || 'Fragancia'}
+                        </span>
+                        ${isOutOfStock ? `
+                            <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px] flex items-center justify-center">
+                                <span class="px-4 py-1.5 rounded-full bg-red-500/90 text-white text-xs font-bold uppercase tracking-wider">Agotado</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase text-amber-600 dark:text-amber-400 tracking-wider">${p.brand}</span>
+                            <h3 class="text-lg font-serif font-bold text-slate-900 dark:text-white line-clamp-1">${p.name}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">${p.description || ''}</p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Precio</span>
+                                <span class="text-xl font-bold text-slate-900 dark:text-white">$${parseFloat(p.price).toFixed(2)}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="openDetailModal('${p.id}')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button onclick="buyOnWhatsapp('${p.id}')" ${isOutOfStock ? 'disabled' : ''} class="px-4 py-2.5 rounded-xl ${isOutOfStock ? 'bg-slate-300 text-slate-500 cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-700 text-white'} font-semibold text-xs flex items-center space-x-2 transition-colors shadow-md">
+                                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    <span>Comprar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.openDetailModal = function(id) {
+            const p = perfumesList.find(item => item.id === id);
+            if (!p) return;
+            const container = document.getElementById('detailModalContent');
+            const isOutOfStock = p.stock <= 0;
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 h-72 md:h-80">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">${p.brand}</span>
+                            <h2 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">${p.name}</h2>
+                            <span class="inline-block mt-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">${p.category}</span>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${p.description}</p>
+                        <div class="flex items-center justify-between py-2 border-y border-slate-200 dark:border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Stock disponible</span>
+                                <span class="text-sm font-semibold ${isOutOfStock ? 'text-red-500' : 'text-slate-700 dark:text-slate-200'}">${p.stock} unidades</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-slate-400 block">Precio unitario</span>
+                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$${parseFloat(p.price).toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl space-y-3 border border-slate-200 dark:border-slate-700/50">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 flex items-center space-x-2">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Pirámide Olfativa</span>
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <span class="font-bold text-slate-700 dark:text-slate-300 block mb-1">Notas de Salida</span>
+                            <span class="text-slate-500 dark:text-slate-400">${p.topNotes || 'No especificadas'}</span>
+                        </div>
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <span class="font-bold text-slate-700 dark:text-slate-300 block mb-1">Notas de Corazón</span>
+                            <span class="text-slate-500 dark:text-slate-400">${p.heartNotes || 'No especificadas'}</span>
+                        </div>
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <span class="font-bold text-slate-700 dark:text-slate-300 block mb-1">Notas de Fondo</span>
+                            <span class="text-slate-500 dark:text-slate-400">${p.baseNotes || 'No especificadas'}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button onclick="closeDetailModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">Cerrar</button>
+                    <button onclick="buyOnWhatsapp('${p.id}')" ${isOutOfStock ? 'disabled' : ''} class="px-6 py-2.5 rounded-xl ${isOutOfStock ? 'bg-slate-300 text-slate-500 cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-700 text-white'} text-sm font-semibold flex items-center space-x-2 shadow-md">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>Solicitar Pedido por WhatsApp</span>
+                    </button>
+                </div>
+            `;
+            document.getElementById('detailModal').classList.remove('hidden');
+        };
+
+        window.closeDetailModal = function() {
+            document.getElementById('detailModal').classList.add('hidden');
+        };
+
+        window.buyOnWhatsapp = function(id) {
+            const p = perfumesList.find(item => item.id === id);
+            if (!p || p.stock <= 0) return;
+
+            const text = `Hola, me interesa comprar el perfume *${p.name}* (${p.brand}) por un valor de *$${parseFloat(p.price).toFixed(2)} USD*. ¿Podríamos coordinar el pago y el envío?`;
+            const url = `https://wa.me/${adminPhone}?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        };
+
+        window.handleAdminBtnClick = function() {
+            if (isAdminLoggedIn) {
+                switchView('admin');
+            } else {
+                document.getElementById('loginModal').classList.remove('hidden');
+            }
+        };
+
+        window.closeLoginModal = function() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginError').classList.add('hidden');
+        };
+
+        window.handleAdminLogin = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginUser').value;
+            const pass = document.getElementById('loginPass').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                closeLoginModal();
+                switchView('admin');
+                showToast("Sesión iniciada con éxito", "check-circle");
+            } catch (err) {
+                console.error("Login Error:", err);
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        };
+
+        window.logoutAdmin = async function() {
+            await signOut(auth);
+            switchView('store');
+            showToast("Sesión de administrador cerrada", "circle-info");
+        };
+
+        function updateAdminUI(loggedIn) {
+            const btnText = document.getElementById('adminBtnText');
+            if (loggedIn) {
+                btnText.textContent = "Panel Admin";
+                renderAdminTable();
+            } else {
+                btnText.textContent = "Acceso Admin";
+                switchView('store');
+            }
+        }
+
+        function switchView(view) {
+            const storeView = document.getElementById('storefrontView');
+            const adminView = document.getElementById('adminDashboardView');
+            if (view === 'admin' && isAdminLoggedIn) {
+                storeView.classList.add('hidden');
+                adminView.classList.remove('hidden');
+                renderAdminTable();
+            } else {
+                adminView.classList.add('hidden');
+                storeView.classList.remove('hidden');
+            }
+        }
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('adminTableBody');
+            tbody.innerHTML = '';
+
+            perfumesList.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-4 flex items-center space-x-3">
+                        <img src="${p.image}" alt="${p.name}" class="w-10 h-10 rounded-lg object-cover bg-slate-100 dark:bg-slate-800">
+                        <div>
+                            <span class="font-semibold text-slate-900 dark:text-white block">${p.name}</span>
+                            <span class="text-xs text-slate-400">${p.id}</span>
+                        </div>
+                    </td>
+                    <td class="p-4 font-medium">${p.brand}</td>
+                    <td class="p-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">${p.category}</span>
+                    </td>
+                    <td class="p-4 font-semibold text-slate-900 dark:text-white">$${parseFloat(p.price).toFixed(2)}</td>
+                    <td class="p-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold ${p.stock > 0 ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-red-500/10 text-red-600 dark:text-red-400'}">
+                            ${p.stock} un.
+                        </span>
+                    </td>
+                    <td class="p-4 text-right space-x-2">
+                        <button onclick="openEditModal('${p.id}')" class="p-2 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/40 rounded-lg transition-colors">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button onclick="deletePerfume('${p.id}')" class="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg transition-colors">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.saveAdminPhone = async function() {
+            const phone = document.getElementById('adminPhoneInput').value.trim();
+            if (!phone) return;
+            try {
+                await setDoc(doc(db, 'settings', 'general'), { phone: phone });
+                showToast("Número de WhatsApp actualizado", "check-circle");
+            } catch (err) {
+                console.error("Error guardando WhatsApp:", err);
+            }
+        };
+
+        window.openAddModal = function() {
+            document.getElementById('productModalTitle').textContent = "Agregar Perfume";
+            document.getElementById('prodId').value = '';
+            document.getElementById('prodName').value = '';
+            document.getElementById('prodBrand').value = '';
+            document.getElementById('prodPrice').value = '';
+            document.getElementById('prodStock').value = '';
+            document.getElementById('prodCategory').value = 'Unisex';
+            document.getElementById('prodImage').value = '';
+            document.getElementById('prodDesc').value = '';
+            document.getElementById('prodTopNotes').value = '';
+            document.getElementById('prodHeartNotes').value = '';
+            document.getElementById('prodBaseNotes').value = '';
+            document.getElementById('productModal').classList.remove('hidden');
+        };
+
+        window.openEditModal = function(id) {
+            const p = perfumesList.find(item => item.id === id);
+            if (!p) return;
+            document.getElementById('productModalTitle').textContent = "Editar Perfume";
+            document.getElementById('prodId').value = p.id;
+            document.getElementById('prodName').value = p.name;
+            document.getElementById('prodBrand').value = p.brand;
+            document.getElementById('prodPrice').value = p.price;
+            document.getElementById('prodStock').value = p.stock;
+            document.getElementById('prodCategory').value = p.category || 'Unisex';
+            document.getElementById('prodImage').value = p.image;
+            document.getElementById('prodDesc').value = p.description || '';
+            document.getElementById('prodTopNotes').value = p.topNotes || '';
+            document.getElementById('prodHeartNotes').value = p.heartNotes || '';
+            document.getElementById('prodBaseNotes').value = p.baseNotes || '';
+            document.getElementById('productModal').classList.remove('hidden');
+        };
+
+        window.closeProductModal = function() {
+            document.getElementById('productModal').classList.add('hidden');
+        };
+
+        window.handleProductSubmit = async function(e) {
+            e.preventDefault();
+            const id = document.getElementById('prodId').value;
+            const data = {
+                name: document.getElementById('prodName').value,
+                brand: document.getElementById('prodBrand').value,
+                price: parseFloat(document.getElementById('prodPrice').value),
+                stock: parseInt(document.getElementById('prodStock').value),
+                category: document.getElementById('prodCategory').value,
+                image: document.getElementById('prodImage').value,
+                description: document.getElementById('prodDesc').value,
+                topNotes: document.getElementById('prodTopNotes').value,
+                heartNotes: document.getElementById('prodHeartNotes').value,
+                baseNotes: document.getElementById('prodBaseNotes').value
+            };
+
+            try {
+                if (id) {
+                    await updateDoc(doc(db, 'perfumes', id), data);
+                    showToast("Perfume actualizado correctamente", "check-circle");
+                } else {
+                    await addDoc(collection(db, 'perfumes'), data);
+                    showToast("Nuevo perfume agregado", "check-circle");
+                }
+                closeProductModal();
+            } catch (err) {
+                console.error("Error guardando perfume:", err);
+            }
+        };
+
+        window.deletePerfume = async function(id) {
+            if (confirm("¿Estás seguro de que deseas eliminar este perfume?")) {
+                try {
+                    await deleteDoc(doc(db, 'perfumes', id));
+                    showToast("Perfume eliminado", "trash");
+                } catch (err) {
+                    console.error("Error eliminando perfume:", err);
+                }
+            }
+        };
+
+        window.toggleDarkMode = function() {
+            document.documentElement.classList.toggle('dark');
+        };
+
+        function showToast(msg, icon = "check-circle") {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            document.getElementById('toastIcon').className = `fa-solid fa-${icon} text-amber-400 text-lg`;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
