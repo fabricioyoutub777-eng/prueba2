@@ -1,4 +1,3 @@
-HTML
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -136,3 +135,634 @@ button:disabled{opacity:.5;cursor:not-allowed}
 <div class="p-4 font-serif text-xl flex justify-between items-center"><span>Pedidos recibidos</span><button onclick="loadOrders()" class="text-sm text-amber-500"><i class="fa-solid fa-rotate"></i> Actualizar</button></div>
 <div class="overflow-x-auto">
 <table class="w-full text-sm text-left">
+<thead class="bg-slate-100 dark:bg-slate-800"><tr><th class="p-3">Pedido</th><th class="p-3">Cliente</th><th class="p-3">Total</th><th class="p-3">Estado</th><th class="p-3">Acciones</th></tr></thead>
+<tbody id="ordersTableBody"></tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="mt-12 py-8 text-center border-t dark:border-slate-800 text-xs text-slate-500">
+© <span id="yearSpan"></span> AURUM PARFUMS · Haute Parfumerie
+</footer>
+
+<!-- DETALLE -->
+<div id="detailModal" class="modal hidden">
+<div class="modal-content bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full p-6 relative">
+<button onclick="closeModal('detailModal')" class="absolute top-4 right-4 text-xl"><i class="fa-solid fa-xmark"></i></button>
+<div id="detailContent"></div>
+</div>
+</div>
+
+<!-- CARRITO -->
+<div id="cartModal" class="modal hidden">
+<div class="modal-content bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 relative">
+<button onclick="closeModal('cartModal')" class="absolute top-4 right-4 text-xl"><i class="fa-solid fa-xmark"></i></button>
+<h2 class="text-2xl font-serif font-bold mb-6"><i class="fa-solid fa-cart-shopping text-amber-500"></i> Mi carrito</h2>
+<div id="cartItems" class="space-y-4"></div>
+<div class="border-t dark:border-slate-700 mt-5 pt-5 flex justify-between text-xl font-bold"><span>Total</span><span id="cartTotal">$0.00 USD</span></div>
+<button onclick="openCheckout()" id="checkoutBtn" class="w-full mt-5 gold-btn-gradient py-3 rounded-xl text-white font-bold">Finalizar compra</button>
+</div>
+</div>
+
+<!-- CHECKOUT -->
+<div id="checkoutModal" class="modal hidden">
+<div class="modal-content bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 relative">
+<button onclick="closeModal('checkoutModal')" class="absolute top-4 right-4 text-xl"><i class="fa-solid fa-xmark"></i></button>
+<h2 class="text-2xl font-serif font-bold mb-5">Finalizar pedido</h2>
+<form id="checkoutForm" onsubmit="submitOrder(event)" class="space-y-4">
+<div><label class="text-xs font-bold uppercase">Nombre completo *</label><input id="customerName" required class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700"></div>
+<div><label class="text-xs font-bold uppercase">Teléfono *</label><input id="customerPhone" type="tel" required class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700"></div>
+<div><label class="text-xs font-bold uppercase">Correo electrónico</label><input id="customerEmail" type="email" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700"></div>
+
+<div><label class="text-xs font-bold uppercase">Entrega *</label>
+<select id="deliveryMethod" required onchange="updateDeliveryFields()" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<option value="domicilio">Envío a domicilio</option><option value="retiro">Retiro en persona</option>
+</select></div>
+
+<div id="addressField"><label class="text-xs font-bold uppercase">Dirección de entrega *</label><input id="customerAddress" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700" placeholder="Calle, número, ciudad, código postal"></div>
+
+<div><label class="text-xs font-bold uppercase">Método de pago *</label>
+<select id="paymentMethod" required class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<option value="Efectivo">Efectivo</option><option value="Transferencia bancaria">Transferencia bancaria</option>
+</select></div>
+
+<div><label class="text-xs font-bold uppercase">Observaciones</label><textarea id="customerNotes" rows="3" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700" placeholder="Indicaciones adicionales..."></textarea></div>
+
+<div class="bg-slate-100 dark:bg-slate-800 p-4 rounded-xl">
+<div class="flex justify-between font-bold"><span>Total del pedido</span><span id="checkoutTotal">$0.00 USD</span></div>
+<p class="text-xs text-slate-500 mt-2">El costo del envío, si corresponde, será coordinado por WhatsApp.</p>
+</div>
+<button type="submit" id="submitOrderBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 py-3 rounded-xl text-white font-bold"><i class="fa-brands fa-whatsapp"></i> Confirmar pedido</button>
+<p class="text-xs text-center text-slate-500">Tu pedido se registrará y podrás enviarlo a nuestra tienda por WhatsApp.</p>
+</form>
+</div>
+</div>
+
+<!-- LOGIN -->
+<div id="loginModal" class="modal hidden">
+<div class="modal-content bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-8 relative">
+<button onclick="closeModal('loginModal')" class="absolute top-4 right-4"><i class="fa-solid fa-xmark text-xl"></i></button>
+<div class="text-center mb-6"><i class="fa-solid fa-lock text-3xl text-amber-500"></i><h2 class="text-2xl font-serif font-bold mt-3">Acceso administrador</h2></div>
+<form onsubmit="handleAdminLogin(event)" class="space-y-4">
+<input id="loginUser" type="email" required placeholder="Correo electrónico" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<input id="loginPass" type="password" required placeholder="Contraseña" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<p id="loginError" class="hidden text-red-500 text-sm">No se pudo iniciar sesión. Revisá tus credenciales.</p>
+<button class="w-full gold-btn-gradient text-white py-3 rounded-xl font-bold">Iniciar sesión</button>
+</form>
+</div>
+</div>
+
+<!-- PRODUCTO ADMIN -->
+<div id="productModal" class="modal hidden">
+<div class="modal-content bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 relative">
+<button onclick="closeModal('productModal')" class="absolute top-4 right-4"><i class="fa-solid fa-xmark text-xl"></i></button>
+<h2 id="productModalTitle" class="text-2xl font-serif font-bold mb-5">Agregar perfume</h2>
+<form onsubmit="handleProductSubmit(event)" class="space-y-3">
+<input type="hidden" id="prodId">
+<input id="prodName" required placeholder="Nombre del perfume" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<input id="prodBrand" required placeholder="Marca" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<div class="grid grid-cols-2 gap-3">
+<input id="prodPrice" type="number" step=".01" min="0" required placeholder="Precio USD" class="p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<input id="prodStock" type="number" min="0" required placeholder="Stock" class="p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+</div>
+<select id="prodCategory" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700"><option>Unisex</option><option>Hombre</option><option>Mujer</option></select>
+<input id="prodImage" type="url" required placeholder="URL de imagen" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<textarea id="prodDesc" required placeholder="Descripción" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700"></textarea>
+<input id="prodTopNotes" placeholder="Notas de salida" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<input id="prodHeartNotes" placeholder="Notas de corazón" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<input id="prodBaseNotes" placeholder="Notas de fondo" class="w-full p-3 rounded-xl border dark:bg-slate-800 dark:border-slate-700">
+<button class="w-full gold-btn-gradient text-white p-3 rounded-xl font-bold">Guardar perfume</button>
+</form>
+</div>
+</div>
+
+<div id="toast" class="fixed bottom-5 right-5 z-[200] bg-slate-900 text-white px-5 py-4 rounded-xl shadow-xl hidden"></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import {getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import {
+ getFirestore,doc,setDoc,updateDoc,deleteDoc,collection,addDoc,
+ onSnapshot,getDocs,runTransaction,serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+/* CONFIGURACION FIREBASE ORIGINAL */
+const firebaseConfig={
+ apiKey:"AIzaSyD3fMW2txHKNAQGIIC6DQIn3J2O7D1cyco",
+ authDomain:"mitiendaperfumes-e0ffc.firebaseapp.com",
+ projectId:"mitiendaperfumes-e0ffc",
+ storageBucket:"mitiendaperfumes-e0ffc.firebasestorage.app",
+ messagingSenderId:"170308114924",
+ appId:"1:170308114924:web:ce126458628092c90988c9",
+ measurementId:"G-R6RZ83WJ7F"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+let perfumesList=[];
+let cart=[];
+let adminPhone="5491100000000";
+let isAdminLoggedIn=false;
+let ordersCache=[];
+let unsubscribeProducts=null;
+let unsubscribeSettings=null;
+
+const initialPerfumes=[
+{name:"Sauvage Eau de Parfum",brand:"Dior",price:165,stock:8,category:"Hombre",image:"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",description:"Una fragancia poderosa e intrigante, fresca y amaderada.",topNotes:"Bergamota de Calabria",heartNotes:"Pimienta de Sichuan, Lavanda",baseNotes:"Ambroxan, Vainilla"},
+{name:"Baccarat Rouge 540",brand:"Maison Francis Kurkdjian",price:325,stock:3,category:"Unisex",image:"https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=800&q=80",description:"Una firma olfativa ambarada, floral y amaderada.",topNotes:"Jazmín, Azafrán",heartNotes:"Madera de Ámbar",baseNotes:"Resina de Abeto, Cedro"},
+{name:"Chanel N°5",brand:"Chanel",price:185,stock:12,category:"Mujer",image:"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80",description:"La esencia misma de la feminidad, un ramo floral aldehídico.",topNotes:"Aldehídos, Ylang-Ylang",heartNotes:"Jazmín, Rosa",baseNotes:"Sándalo, Vainilla, Vetiver"}
+];
+
+const $=id=>document.getElementById(id);
+const money=value=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(Number(value)||0);
+const safe=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const getProduct=id=>perfumesList.find(p=>p.id===id);
+
+function toast(message){
+ const el=$("toast");el.textContent=message;el.classList.remove("hidden");
+ setTimeout(()=>el.classList.add("hidden"),3500);
+}
+
+window.closeModal=id=>$(id).classList.add("hidden");
+window.toggleDarkMode=()=>document.documentElement.classList.toggle("dark");
+
+function switchView(view){
+ $("storefrontView").classList.toggle("hidden",view==="admin");
+ $("adminDashboardView").classList.toggle("hidden",view!=="admin");
+ if(view==="admin"&&isAdminLoggedIn){renderAdminTable();loadOrders();}
+ window.scrollTo(0,0);
+}
+
+window.resetFilters=()=>{
+ $("searchInput").value="";
+ $("brandSelect").value="";
+ $("categorySelect").value="";
+ $("stockToggle").checked=false;
+ applyFilters();
+};
+
+window.applyFilters=()=>{
+ const search=$("searchInput").value.toLowerCase();
+ const brand=$("brandSelect").value;
+ const category=$("categorySelect").value;
+ const stock=$("stockToggle").checked;
+ const filtered=perfumesList.filter(p=>
+  (String(p.name||"").toLowerCase().includes(search)||
+   String(p.brand||"").toLowerCase().includes(search)||
+   String(p.topNotes||"").toLowerCase().includes(search)||
+   String(p.heartNotes||"").toLowerCase().includes(search))&&
+  (!brand||p.brand===brand)&&(!category||p.category===category)&&(!stock||Number(p.stock)>0)
+ );
+ renderProductGrid(filtered);
+};
+
+function populateBrands(){
+ const select=$("brandSelect"),value=select.value;
+ select.innerHTML='<option value="">Todas las marcas</option>';
+ [...new Set(perfumesList.map(p=>p.brand).filter(Boolean))].sort().forEach(b=>{
+  const option=document.createElement("option");option.value=b;option.textContent=b;select.appendChild(option);
+ });
+ select.value=value;
+}
+
+function renderProductGrid(items){
+ const grid=$("productGrid");grid.innerHTML="";
+ $("loading").classList.add("hidden");
+ $("emptyState").classList.toggle("hidden",items.length!==0);
+
+ items.forEach(p=>{
+  const card=document.createElement("article");
+  card.className="glass-card rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col";
+  const sold=Number(p.stock)<=0;
+  card.innerHTML=`
+  <div class="relative h-64 bg-slate-100 dark:bg-slate-800">
+   <img src="${safe(p.image)}" alt="${safe(p.name)}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80'">
+   <span class="absolute top-3 left-3 bg-slate-900/80 text-white text-xs px-3 py-1 rounded-full">${safe(p.category||"Fragancia")}</span>
+   ${sold?'<span class="absolute inset-0 flex items-center justify-center bg-black/60 text-white font-bold">AGOTADO</span>':""}
+  </div>
+  <div class="p-5 flex-grow flex flex-col justify-between gap-4">
+   <div><p class="text-xs uppercase font-bold text-amber-600">${safe(p.brand)}</p>
+   <h3 class="font-serif text-lg font-bold">${safe(p.name)}</h3>
+   <p class="text-xs text-slate-500 mt-2">${safe(p.description||"")}</p></div>
+   <div class="flex justify-between items-center border-t dark:border-slate-700 pt-4">
+    <div><p class="text-xs text-slate-400">Precio</p><p class="text-xl font-bold">${money(p.price)}</p></div>
+    <div class="flex gap-2">
+     <button data-action="detail" data-id="${safe(p.id)}" class="border dark:border-slate-700 rounded-xl p-3"><i class="fa-solid fa-eye"></i></button>
+     <button data-action="add" data-id="${safe(p.id)}" ${sold?"disabled":""} class="bg-emerald-600 text-white rounded-xl px-3 py-2 text-xs font-bold"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
+    </div>
+   </div>
+  </div>`;
+  grid.appendChild(card);
+ });
+}
+
+$("productGrid").addEventListener("click",e=>{
+ const button=e.target.closest("button[data-action]");
+ if(!button)return;
+ if(button.dataset.action==="add")addToCart(button.dataset.id);
+ if(button.dataset.action==="detail")openDetailModal(button.dataset.id);
+});
+
+function initFirestore(){
+ unsubscribeProducts=onSnapshot(collection(db,"perfumes"),async snapshot=>{
+  if(snapshot.empty){
+   try{
+    await seedInitialData();
+   }catch(e){console.error(e);toast("No se pudo inicializar el catálogo. Revisá Firebase.");}
+   return;
+  }
+  perfumesList=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+  populateBrands();applyFilters();
+  if(isAdminLoggedIn)renderAdminTable();
+ },error=>{console.error(error);$("loading").textContent="Error cargando el catálogo. Revisá las reglas de Firebase.";});
+
+ unsubscribeSettings=onSnapshot(doc(db,"settings","general"),async snap=>{
+  if(snap.exists()){
+   adminPhone=snap.data().phone||"5491100000000";
+  }else{
+   adminPhone="5491100000000";
+   if(isAdminLoggedIn){
+    try{await setDoc(doc(db,"settings","general"),{phone:adminPhone});}catch(e){console.error(e);}
+   }
+  }
+  $("adminPhoneInput").value=adminPhone;
+ });
+}
+
+async function seedInitialData(){
+ const existing=await getDocs(collection(db,"perfumes"));
+ if(!existing.empty)return;
+ for(const p of initialPerfumes)await addDoc(collection(db,"perfumes"),p);
+}
+
+function updateCartCount(){
+ $("cartCount").textContent=cart.reduce((sum,item)=>sum+item.quantity,0);
+}
+
+window.addToCart=id=>{
+ const p=getProduct(id);if(!p||p.stock<=0)return;
+ const existing=cart.find(i=>i.id===id);
+ if(existing){
+  if(existing.quantity>=p.stock){toast("No hay más unidades disponibles.");return;}
+  existing.quantity++;
+ }else cart.push({id,quantity:1});
+ updateCartCount();toast("Producto agregado al carrito");
+};
+
+window.openCart=()=>{
+ renderCart();$("cartModal").classList.remove("hidden");
+};
+
+function renderCart(){
+ const container=$("cartItems");container.innerHTML="";
+ if(cart.length===0){
+  container.innerHTML='<p class="text-center text-slate-500 py-8">Tu carrito está vacío.</p>';
+  $("checkoutBtn").disabled=true;
+ }else{
+  $("checkoutBtn").disabled=false;
+  cart=cart.filter(item=>getProduct(item.id));
+  cart.forEach(item=>{
+   const p=getProduct(item.id);if(!p)return;
+   const row=document.createElement("div");
+   row.className="flex gap-3 items-center border-b dark:border-slate-700 pb-4";
+   row.innerHTML=`
+   <img src="${safe(p.image)}" class="w-16 h-16 rounded-xl object-cover">
+   <div class="flex-grow min-w-0"><p class="font-semibold">${safe(p.name)}</p>
+   <p class="text-sm text-amber-600">${money(p.price)}</p>
+   <div class="flex items-center gap-3 mt-2">
+    <button data-cart="minus" data-id="${safe(p.id)}" class="border rounded px-2">−</button>
+    <span>${item.quantity}</span>
+    <button data-cart="plus" data-id="${safe(p.id)}" class="border rounded px-2">+</button>
+    <button data-cart="remove" data-id="${safe(p.id)}" class="text-red-500 ml-2"><i class="fa-solid fa-trash"></i></button>
+   </div></div>
+   <strong>${money(p.price*item.quantity)}</strong>`;
+   container.appendChild(row);
+  });
+ }
+ const total=cart.reduce((sum,i)=>sum+(getProduct(i.id)?.price||0)*i.quantity,0);
+ $("cartTotal").textContent=money(total);
+ $("checkoutTotal").textContent=money(total);
+ updateCartCount();
+}
+
+$("cartItems").addEventListener("click",e=>{
+ const btn=e.target.closest("button[data-cart]");if(!btn)return;
+ const item=cart.find(i=>i.id===btn.dataset.id);if(!item)return;
+ const p=getProduct(item.id);
+ if(btn.dataset.cart==="plus"){
+  if(item.quantity>=p.stock){toast("Stock insuficiente.");return;}
+  item.quantity++;
+ }else if(btn.dataset.cart==="minus"){
+  item.quantity--;if(item.quantity<=0)cart=cart.filter(i=>i.id!==item.id);
+ }else cart=cart.filter(i=>i.id!==item.id);
+ renderCart();
+});
+
+window.openCheckout=()=>{
+ if(!cart.length)return;
+ closeModal("cartModal");
+ renderCart();
+ updateDeliveryFields();
+ $("checkoutModal").classList.remove("hidden");
+};
+
+window.updateDeliveryFields=()=>{
+ const home=$("deliveryMethod").value==="domicilio";
+ $("addressField").classList.toggle("hidden",!home);
+ $("customerAddress").required=home;
+};
+
+window.openDetailModal=id=>{
+ const p=getProduct(id);if(!p)return;
+ $("detailContent").innerHTML=`
+ <div class="grid sm:grid-cols-2 gap-6 items-center">
+  <img src="${safe(p.image)}" class="w-full h-72 object-cover rounded-2xl">
+  <div><p class="text-amber-500 font-bold text-xs uppercase">${safe(p.brand)}</p>
+  <h2 class="text-3xl font-serif font-bold">${safe(p.name)}</h2>
+  <p class="my-4 text-sm text-slate-500">${safe(p.description)}</p>
+  <p class="text-2xl font-bold">${money(p.price)}</p>
+  <p class="text-sm mt-2">Stock: ${Number(p.stock)}</p>
+  <button onclick="addToCart('${safe(p.id)}');closeModal('detailModal');openCart()" ${p.stock<=0?"disabled":""} class="mt-5 w-full gold-btn-gradient text-white rounded-xl py-3 font-bold"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+  </div>
+ </div>
+ <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 text-sm">
+  <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl"><b>Salida</b><p>${safe(p.topNotes||"No especificadas")}</p></div>
+  <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl"><b>Corazón</b><p>${safe(p.heartNotes||"No especificadas")}</p></div>
+  <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl"><b>Fondo</b><p>${safe(p.baseNotes||"No especificadas")}</p></div>
+ </div>`;
+ $("detailModal").classList.remove("hidden");
+};
+
+window.submitOrder=async e=>{
+ e.preventDefault();
+ if(!cart.length){toast("El carrito está vacío.");return;}
+ const button=$("submitOrderBtn");
+ button.disabled=true;button.textContent="Registrando pedido...";
+ // Abrimos una pestaña durante el gesto del usuario para evitar bloqueadores.
+ const waWindow=window.open("about:blank","_blank");
+ try{
+  const name=$("customerName").value.trim();
+  const phone=$("customerPhone").value.trim();
+  const email=$("customerEmail").value.trim();
+  const delivery=$("deliveryMethod").value;
+  const address=$("customerAddress").value.trim();
+  const payment=$("paymentMethod").value;
+  const notes=$("customerNotes").value.trim();
+
+  const items=cart.map(item=>{
+   const p=getProduct(item.id);
+   if(!p||p.stock<item.quantity)throw new Error("Stock insuficiente para "+(p?.name||"un producto"));
+   return {productId:item.id,name:p.name,brand:p.brand,price:Number(p.price),quantity:item.quantity,subtotal:Number(p.price)*item.quantity};
+  });
+  const total=items.reduce((sum,item)=>sum+item.subtotal,0);
+
+  const order={
+   customer:{name,phone,email},
+   delivery:{method:delivery,address:delivery==="domicilio"?address:"Retiro en persona"},
+   paymentMethod:payment,
+   notes,
+   items,
+   total,
+   currency:"USD",
+   status:"Pendiente",
+   createdAt:serverTimestamp()
+  };
+
+  const orderRef=await runTransaction(db,async transaction=>{
+   // Verifica nuevamente el stock y lo descuenta dentro de la misma transacción.
+   const refs=items.map(item=>doc(db,"perfumes",item.productId));
+   const snapshots=[];
+   for(const ref of refs){
+    snapshots.push(await transaction.get(ref));
+   }
+   snapshots.forEach((snap,index)=>{
+    if(!snap.exists())throw new Error("Un producto ya no está disponible.");
+    const stock=Number(snap.data().stock)||0;
+    if(stock<items[index].quantity)throw new Error("Stock insuficiente para "+items[index].name);
+   });
+   snapshots.forEach((snap,index)=>{
+    transaction.update(refs[index],{stock:Number(snap.data().stock)-items[index].quantity});
+   });
+   const newRef=doc(collection(db,"orders"));
+   transaction.set(newRef,order);
+   return newRef;
+  });
+
+  let message=`*NUEVO PEDIDO - AURUM PARFUMS*%0A`;
+  message+=`Pedido: ${orderRef.id}%0A`;
+  message+=`--------------------%0A`;
+  message+=`*Cliente:* ${name}%0A*Teléfono:* ${phone}%0A`;
+  if(email)message+=`*Email:* ${email}%0A`;
+  message+=`*Entrega:* ${delivery==="domicilio"?"A domicilio":"Retiro en persona"}%0A`;
+  if(delivery==="domicilio")message+=`*Dirección:* ${address}%0A`;
+  message+=`*Pago:* ${payment}%0A%0A*PRODUCTOS*%0A`;
+  items.forEach(item=>{
+   message+=`- ${item.name} (${item.brand}) x${item.quantity}: ${money(item.subtotal)}%0A`;
+  });
+  message+=`%0A*TOTAL: ${money(total)}*%0A`;
+  if(notes)message+=`*Observaciones:* ${notes}%0A`;
+  message+=`%0A¡Gracias!`;
+
+  const waUrl=`https://wa.me/${adminPhone}?text=${encodeURIComponent(decodeURIComponent(message))}`;
+  // El pedido ya está guardado; ahora se abre el mensaje preparado.
+  if(waWindow)waWindow.location.href=waUrl;
+  else window.location.href=waUrl;
+
+  cart=[];
+  updateCartCount();
+  closeModal("checkoutModal");
+  $("checkoutForm").reset();
+  updateDeliveryFields();
+  toast("¡Pedido registrado correctamente!");
+ }catch(err){
+  console.error("Error registrando pedido:",err);
+  if(waWindow)waWindow.close();
+  toast("No se pudo registrar el pedido: "+err.message);
+ }finally{
+  button.disabled=false;
+  button.innerHTML='<i class="fa-brands fa-whatsapp"></i> Confirmar pedido';
+ }
+};
+
+/* ADMINISTRACION */
+window.handleAdminBtnClick=()=>{
+ if(isAdminLoggedIn)switchView("admin");
+ else $("loginModal").classList.remove("hidden");
+};
+
+window.handleAdminLogin=async e=>{
+ e.preventDefault();
+ try{
+  await signInWithEmailAndPassword(auth,$("loginUser").value,$("loginPass").value);
+  closeModal("loginModal");switchView("admin");toast("Sesión iniciada correctamente");
+ }catch(err){
+  console.error(err);$("loginError").classList.remove("hidden");
+ }
+};
+
+onAuthStateChanged(auth,user=>{
+ isAdminLoggedIn=!!user;
+ if(!user)switchView("store");
+ else if(!$("loginModal").classList.contains("hidden"))switchView("admin");
+ if(user)renderAdminTable();
+});
+
+window.logoutAdmin=async()=>{
+ await signOut(auth);switchView("store");toast("Sesión cerrada");
+};
+
+function renderAdminTable(){
+ if(!isAdminLoggedIn)return;
+ $("statProducts").textContent=perfumesList.length;
+ $("statStock").textContent=perfumesList.reduce((s,p)=>s+(Number(p.stock)||0),0);
+ const tbody=$("adminTableBody");tbody.innerHTML="";
+ perfumesList.forEach(p=>{
+  const tr=document.createElement("tr");
+  tr.className="border-t dark:border-slate-800";
+  tr.innerHTML=`
+  <td class="p-3"><div class="flex gap-2 items-center"><img src="${safe(p.image)}" class="w-10 h-10 rounded-lg object-cover"><span>${safe(p.name)}</span></div></td>
+  <td class="p-3">${safe(p.brand)}</td>
+  <td class="p-3">${money(p.price)}</td>
+  <td class="p-3">${Number(p.stock)}</td>
+  <td class="p-3 whitespace-nowrap">
+   <button data-edit="${safe(p.id)}" class="text-amber-500 p-2"><i class="fa-solid fa-pen"></i></button>
+   <button data-delete="${safe(p.id)}" class="text-red-500 p-2"><i class="fa-solid fa-trash"></i></button>
+  </td>`;
+  tbody.appendChild(tr);
+ });
+}
+
+$("adminTableBody").addEventListener("click",e=>{
+ const edit=e.target.closest("[data-edit]");
+ const del=e.target.closest("[data-delete]");
+ if(edit)openEditModal(edit.dataset.edit);
+ if(del)deletePerfume(del.dataset.delete);
+});
+
+window.openAddModal=()=>{
+ $("productModalTitle").textContent="Agregar perfume";
+ ["prodId","prodName","prodBrand","prodPrice","prodStock","prodImage","prodDesc","prodTopNotes","prodHeartNotes","prodBaseNotes"].forEach(id=>$(id).value="");
+ $("prodCategory").value="Unisex";
+ $("productModal").classList.remove("hidden");
+};
+
+window.openEditModal=id=>{
+ const p=getProduct(id);if(!p)return;
+ $("productModalTitle").textContent="Editar perfume";
+ $("prodId").value=p.id;
+ $("prodName").value=p.name||"";
+ $("prodBrand").value=p.brand||"";
+ $("prodPrice").value=p.price||0;
+ $("prodStock").value=p.stock||0;
+ $("prodCategory").value=p.category||"Unisex";
+ $("prodImage").value=p.image||"";
+ $("prodDesc").value=p.description||"";
+ $("prodTopNotes").value=p.topNotes||"";
+ $("prodHeartNotes").value=p.heartNotes||"";
+ $("prodBaseNotes").value=p.baseNotes||"";
+ $("productModal").classList.remove("hidden");
+};
+
+window.handleProductSubmit=async e=>{
+ e.preventDefault();
+ const id=$("prodId").value;
+ const data={
+  name:$("prodName").value.trim(),
+  brand:$("prodBrand").value.trim(),
+  price:Number($("prodPrice").value),
+  stock:Number($("prodStock").value),
+  category:$("prodCategory").value,
+  image:$("prodImage").value.trim(),
+  description:$("prodDesc").value.trim(),
+  topNotes:$("prodTopNotes").value.trim(),
+  heartNotes:$("prodHeartNotes").value.trim(),
+  baseNotes:$("prodBaseNotes").value.trim()
+ };
+ try{
+  if(id)await updateDoc(doc(db,"perfumes",id),data);
+  else await addDoc(collection(db,"perfumes"),data);
+  closeModal("productModal");toast("Producto guardado correctamente");
+ }catch(err){console.error(err);toast("Error guardando producto. Revisá Firebase.");}
+};
+
+window.deletePerfume=async id=>{
+ if(!isAdminLoggedIn||!confirm("¿Eliminar este perfume?"))return;
+ try{
+  await deleteDoc(doc(db,"perfumes",id));
+  toast("Perfume eliminado");
+ }catch(e){console.error(e);toast("Error eliminando perfume");}
+};
+
+window.saveAdminPhone=async()=>{
+ if(!isAdminLoggedIn)return;
+ const phone=$("adminPhoneInput").value.replace(/\D/g,"");
+ if(phone.length<8){toast("Ingresá un número válido con código de país.");return;}
+ try{
+  await setDoc(doc(db,"settings","general"),{phone},{merge:true});
+  adminPhone=phone;toast("WhatsApp actualizado");
+ }catch(e){console.error(e);toast("Error guardando el número");}
+};
+
+/* PEDIDOS EN ADMINISTRACION */
+window.loadOrders=async()=>{
+ if(!isAdminLoggedIn)return;
+ try{
+  const snapshot=await getDocs(collection(db,"orders"));
+  ordersCache=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+  ordersCache.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+  $("statOrders").textContent=ordersCache.length;
+  renderOrders();
+ }catch(e){
+  console.error(e);
+  $("ordersTableBody").innerHTML='<tr><td colspan="5" class="p-4 text-red-500">No se pudieron cargar los pedidos. Revisá las reglas de Firestore.</td></tr>';
+ }
+};
+
+function renderOrders(){
+ const tbody=$("ordersTableBody");tbody.innerHTML="";
+ if(!ordersCache.length){
+  tbody.innerHTML='<tr><td colspan="5" class="p-5 text-center text-slate-500">Todavía no hay pedidos.</td></tr>';return;
+ }
+ ordersCache.forEach(order=>{
+  const tr=document.createElement("tr");tr.className="border-t dark:border-slate-800";
+  tr.innerHTML=`
+  <td class="p-3"><span class="font-semibold">${safe(order.id.slice(0,8))}</span></td>
+  <td class="p-3">${safe(order.customer?.name||"")}</td>
+  <td class="p-3 font-bold">${money(order.total)}</td>
+  <td class="p-3"><select data-status="${safe(order.id)}" class="p-2 rounded border dark:bg-slate-800 dark:border-slate-700">
+  ${["Pendiente","Confirmado","Preparando","Enviado","Entregado","Cancelado"].map(s=>`<option ${order.status===s?"selected":""}>${s}</option>`).join("")}
+  </select></td>
+  <td class="p-3"><button data-order="${safe(order.id)}" class="text-amber-500 p-2"><i class="fa-solid fa-eye"></i> Ver</button></td>`;
+  tbody.appendChild(tr);
+ });
+}
+
+$("ordersTableBody").addEventListener("change",async e=>{
+ const select=e.target.closest("[data-status]");if(!select||!isAdminLoggedIn)return;
+ try{
+  await updateDoc(doc(db,"orders",select.dataset.status),{status:select.value});
+  const order=ordersCache.find(o=>o.id===select.dataset.status);
+  if(order)order.status=select.value;
+  toast("Estado del pedido actualizado");
+ }catch(err){console.error(err);toast("No se pudo actualizar el estado");}
+});
+
+$("ordersTableBody").addEventListener("click",e=>{
+ const button=e.target.closest("[data-order]");if(!button)return;
+ const order=ordersCache.find(o=>o.id===button.dataset.order);if(!order)return;
+ const items=(order.items||[]).map(i=>`${i.name} x${i.quantity} - ${money(i.subtotal)}`).join("\n");
+ alert(`PEDIDO ${order.id}\n\nCliente: ${order.customer?.name}\nTeléfono: ${order.customer?.phone}\nEntrega: ${order.delivery?.method}\nDirección: ${order.delivery?.address||"Retiro"}\nPago: ${order.paymentMethod}\n\n${items}\n\nTOTAL: ${money(order.total)}\nEstado: ${order.status||"Pendiente"}\nObservaciones: ${order.notes||"Ninguna"}`);
+});
+
+document.addEventListener("DOMContentLoaded",()=>{
+ $("yearSpan").textContent=new Date().getFullYear();
+ initFirestore();
+ updateCartCount();
+});
+</script>
+</body>
+</html>
