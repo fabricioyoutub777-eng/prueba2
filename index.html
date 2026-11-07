@@ -201,7 +201,7 @@
         </section>
     </main>
 
-    <!-- FLOATING CART BOTTOM BAR (Estilo App Ejemplo) -->
+    <!-- FLOATING CART BOTTOM BAR -->
     <div id="floatingCartBar" class="fixed bottom-4 left-4 right-4 max-w-xl mx-auto z-40 hidden">
         <button onclick="openCartModal()" class="w-full bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-amber-500/30 hover:scale-[1.01] transition-transform">
             <div class="flex items-center space-x-3">
@@ -230,9 +230,7 @@
                 </button>
             </div>
 
-            <div id="cartItemsList" class="p-5 overflow-y-auto space-y-4 flex-grow">
-                <!-- Populated via JS -->
-            </div>
+            <div id="cartItemsList" class="p-5 overflow-y-auto space-y-4 flex-grow"></div>
 
             <div class="p-5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 space-y-4">
                 <div class="flex justify-between items-center text-lg font-bold">
@@ -355,7 +353,7 @@
         </div>
     </div>
 
-    <!-- Product Form Modal (Add/Edit) -->
+    <!-- Product Form Modal -->
     <div id="productModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm overflow-y-auto">
         <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-amber-500/20 relative my-8">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400">
@@ -459,7 +457,7 @@
         const db = getFirestore(app);
 
         let perfumesList = [];
-        let cart = []; // Array of items: { perfumeId, quantity }
+        let cart = [];
         let adminPhone = '5491100000000';
         let isAdminLoggedIn = false;
 
@@ -650,7 +648,6 @@
             });
         }
 
-        // CART LOGIC
         window.addToCart = function(id) {
             const perfume = perfumesList.find(p => p.id === id);
             if (!perfume || perfume.stock <= 0) return;
@@ -787,7 +784,6 @@
             document.getElementById('checkoutModal').classList.add('hidden');
         };
 
-        // SUBMIT ORDER TO WHATSAPP
         window.submitOrderToWhatsapp = function(e) {
             e.preventDefault();
             if (cart.length === 0) return;
@@ -826,12 +822,10 @@
             window.open(url, '_blank');
             closeCheckoutModal();
 
-            // Clear cart
             cart = [];
             updateCartUI();
         };
 
-        // ADMIN & OTHER UTILS
         window.openDetailModal = function(id) {
             const p = perfumesList.find(item => item.id === id);
             if (!p) return;
